@@ -1,0 +1,35 @@
+{
+  "name": "ofada-squad",
+  "version": "1.0.0",
+  "description": "A slack bot that helps order food",
+  "main": "./build/start.js",
+  "scripts": {
+    "dev": "nodemon src/start.js --exec babel-node",
+    "prod": "NODE_ENV=production node build/start.js",
+    "build": "rm -rf ./build/ && babel src --out-dir build/ --copy-files"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ajibs/ofada-squad.git"
+  },
+  "author": "Bolu Ajibawo <bolu.ajibawo@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/ajibs/ofada-squad#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.18.2",
+    "config": "^1.28.1",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.9",
+    "request": "^2.83.0",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.11.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "nodemon": "^1.17.1"
+  }
+}
