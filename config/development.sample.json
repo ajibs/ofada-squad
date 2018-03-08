@@ -1,0 +1,6 @@
+{
+  "slack": {
+    "dialog": "https://slack.com/api/dialog.open",
+    "token": "Bearer xoxp... // OAuth Access Token goes here"
+  }
+}
