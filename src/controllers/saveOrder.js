@@ -1,5 +1,7 @@
 import winston from 'winston';
 import postChatMessage from './postChatMessage';
+import orderReceivedResponse from '../responses/orderReceived';
+import formatInputOrder from './formatInputOrder';
 
 const Food = require('../models/Food');
 
@@ -8,22 +10,17 @@ async function saveOrder(req, res) {
     const slackReqObj = JSON.parse(req.body.payload);
 
     if (slackReqObj.callback_id === 'user_order') {
-      const { food_items, total_price } = slackReqObj.submission;
       const user = slackReqObj.user.name;
-      const data = { food_items, total_price, user };
 
-      // save to database;
-      await new Food(data).save();
+      winston.info('Formatting user order to proper input');
+      const formattedFoodOrder = await formatInputOrder(slackReqObj.submission.foodItems, user);
 
-      const response = {
-        responseUrl: slackReqObj.response_url,
-        text: `Got it :thumbsup: Generating your food **${user}**
-          Please carry on, I'll notify you when I'm done.`,
-        mrkdwn: true,
-        mrkdwn_in: ['text'],
-      };
+      winston.info('Saving food order to database');
+      await new Food(formattedFoodOrder).save();
+
+      const response = orderReceivedResponse(slackReqObj, user);
       postChatMessage(response);
-      winston.info('Response sent to user');
+      winston.info('Order saved and response sent to user');
     }
     return res.status(200).send();
   } catch (err) {
@@ -33,4 +30,3 @@ async function saveOrder(req, res) {
 }
 
 export default saveOrder;
-

@@ -1,40 +1,16 @@
 import config from 'config';
 import winston from 'winston';
 import request from 'request';
+import inputForm from '../responses/inputOrderForm';
 
 const slackConfig = config.get('slack');
 
 function placeOrder(req, res) {
   try {
-    const slackReqObj = req.body;
+    winston.info('Slash command received from a slack user');
+    const response = inputForm(req.body);
 
-    const response = {
-      trigger_id: slackReqObj.trigger_id,
-      dialog: {
-        callback_id: 'user_order',
-        title: 'Place your order',
-        submit_label: 'Request',
-        elements: [
-          {
-            type: 'textarea',
-            label: 'Food Details',
-            name: 'food_items',
-            placeholder: 'Amala - 200\nBeef - 100\nPlantain - 100',
-          },
-          {
-            type: 'text',
-            label: 'Total Price',
-            name: 'total_price',
-            placeholder: '600',
-            subtype: 'number',
-            min_length: 3,
-            max_length: 4,
-            hint: 'sum up the price of the food item listed',
-          },
-        ],
-      },
-    };
-
+    winston.info('Sending input form to user');
     request.post({
       url: slackConfig.dialog,
       headers: {

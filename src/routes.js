@@ -3,6 +3,8 @@ import saveFoodOrder from './controllers/saveOrder';
 import placeFoodOrder from './controllers/placeOrder';
 import getFoodOrders from './controllers/getOrders';
 import showHomePage from './controllers/showHome';
+import totalPriceForToday from './controllers/totalPrice';
+
 
 const router = new express.Router();
 
@@ -15,6 +17,8 @@ router.post('/slack/command/food', placeFoodOrder);
 router.post('/slack/actions', saveFoodOrder);
 
 // retrieve today's orders
-router.get('/food/orders', getFoodOrders);
+router.get('/food/today/orders', getFoodOrders);
+
+router.get('/food/today/total-price', totalPriceForToday);
 
 export default router;
