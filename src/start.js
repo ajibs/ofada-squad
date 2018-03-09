@@ -1,16 +1,18 @@
 import 'babel-polyfill';
-import config from 'config';
 import express from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
 import winston from 'winston';
+import dotenv from 'dotenv';
 
 import bootstrap from './bootstrap';
 
 const app = express();
 
+dotenv.config();
+
 // connect to database
-mongoose.connect(config.get('database'));
+mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (err) => {
   winston.error(`Error!: ${err.message}`);
@@ -18,7 +20,7 @@ mongoose.connection.on('error', (err) => {
 
 app.start = async () => {
   winston.info('Starting Server...');
-  const port = config.get('port');
+  const port = process.env.PORT;
   app.set('port', port);
   bootstrap(app);
   const server = http.createServer(app);

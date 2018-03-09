@@ -1,9 +1,6 @@
-import config from 'config';
 import winston from 'winston';
 import request from 'request';
 import inputForm from '../responses/inputOrderForm';
-
-const slackConfig = config.get('slack');
 
 function placeOrder(req, res) {
   try {
@@ -12,9 +9,9 @@ function placeOrder(req, res) {
 
     winston.info('Sending input form to user');
     request.post({
-      url: slackConfig.dialog,
+      url: process.env.DIALOG,
       headers: {
-        Authorization: slackConfig.token,
+        Authorization: process.env.TOKEN,
       },
       body: response,
       json: true,

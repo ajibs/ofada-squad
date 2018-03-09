@@ -4,9 +4,12 @@
   "description": "A slack bot that helps order food",
   "main": "./build/start.js",
   "scripts": {
+    "start": "NODE_ENV=production node build/start.js",
     "dev": "nodemon src/start.js --exec babel-node",
-    "prod": "NODE_ENV=production node build/start.js",
     "build": "rm -rf ./build/ && babel src --out-dir build/ --copy-files"
+  },
+  "engines": {
+    "node": "8.9.4"
   },
   "repository": {
     "type": "git",
@@ -18,7 +21,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
-    "config": "^1.28.1",
+    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "mongoose": "^5.0.9",
     "request": "^2.83.0",
