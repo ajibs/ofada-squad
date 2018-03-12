@@ -15,11 +15,16 @@ async function saveOrder(req, res) {
       winston.info('Formatting user order to proper input');
       const formattedOrder = formatFoodOrder(slackReqObj.submission.foodItems, user);
 
+      winston.info('Get hook for channel');
+      winston.info(slackReqObj.response_url);
+      res.json(slackReqObj.response_url);
+      /*
       winston.info('Saving food order to database');
       await new Food(formattedOrder).save();
 
       postChatMessage(orderReceivedMessage(slackReqObj, user));
       winston.info('Order saved and response sent to user');
+      */
     }
     return res.status(200).send();
   } catch (err) {

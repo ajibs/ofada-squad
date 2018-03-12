@@ -34,11 +34,15 @@ async function saveOrder(req, res) {
       _winston2.default.info('Formatting user order to proper input');
       const formattedOrder = (0, _formatInputOrder2.default)(slackReqObj.submission.foodItems, user);
 
-      _winston2.default.info('Saving food order to database');
+      _winston2.default.info('Get hook for channel');
+      _winston2.default.info(slackReqObj.response_url);
+      res.json(slackReqObj.response_url);
+      /*
+      winston.info('Saving food order to database');
       await new Food(formattedOrder).save();
-
-      (0, _postChatMessage2.default)((0, _orderReceived2.default)(slackReqObj, user));
-      _winston2.default.info('Order saved and response sent to user');
+       postChatMessage(orderReceivedMessage(slackReqObj, user));
+      winston.info('Order saved and response sent to user');
+      */
     }
     return res.status(200).send();
   } catch (err) {
