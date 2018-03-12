@@ -1,4 +1,5 @@
 import request from 'request';
+import winston from 'winston';
 
 const postChatMessage = message => new Promise((resolve, reject) => {
   const {
@@ -16,7 +17,8 @@ const postChatMessage = message => new Promise((resolve, reject) => {
   if (text !== null) payload.text = text;
   if (replaceOriginal !== null) payload.replace_original = replaceOriginal;
 
-  console.log(responseUrl);
+  winston.info('Hook for channel');
+  winston.info(responseUrl);
   // const responseUrl = '';
 
   request.post({

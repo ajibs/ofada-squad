@@ -32,7 +32,7 @@ const postChatMessage = message => new Promise((resolve, reject) => {
   _request2.default.post({
     url: responseUrl,
     body: payload,
-    json: true
+    json: true,
   }, (err, response, body) => {
     if (err) {
       reject(err);
