@@ -1,6 +1,6 @@
 function orderReceived(slackData, userName) {
   return {
-    responseUrl: slackData.response_url,
+    responseUrl: process.env.CHANNEL_HOOK || slackData.response_url,
     text: `Got it :thumbsup: *${userName}*`,
     mrkdwn: true,
     mrkdwn_in: ['text'],
