@@ -1,7 +1,7 @@
 import winston from 'winston';
 import postChatMessage from './postChatMessage';
-import orderReceivedResponse from '../responses/orderReceived';
-import formatInputOrder from './formatInputOrder';
+import orderReceivedMessage from '../responses/orderReceived';
+import formatFoodOrder from './formatInputOrder';
 
 const Food = require('../models/Food');
 
@@ -13,13 +13,12 @@ async function saveOrder(req, res) {
       const user = slackReqObj.user.name;
 
       winston.info('Formatting user order to proper input');
-      const formattedFoodOrder = await formatInputOrder(slackReqObj.submission.foodItems, user);
+      const formattedOrder = formatFoodOrder(slackReqObj.submission.foodItems, user);
 
       winston.info('Saving food order to database');
-      await new Food(formattedFoodOrder).save();
+      await new Food(formattedOrder).save();
 
-      const response = orderReceivedResponse(slackReqObj, user);
-      postChatMessage(response);
+      postChatMessage(orderReceivedMessage(slackReqObj, user));
       winston.info('Order saved and response sent to user');
     }
     return res.status(200).send();

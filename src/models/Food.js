@@ -2,8 +2,12 @@ const mongoose = require('mongoose');
 
 const foodSchema = new mongoose.Schema({
   foodItems: {
-    type: [String],
+    type: [[String]],
     required: true,
+  },
+  foodType: {
+    type: String,
+    default: 'non-swallow',
   },
   priceOfOrder: {
     type: Number,

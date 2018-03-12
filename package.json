@@ -6,7 +6,9 @@
   "scripts": {
     "start": "NODE_ENV=production node build/start.js",
     "dev": "nodemon src/start.js --exec babel-node",
-    "build": "rm -rf ./build/ && babel src --out-dir build/ --copy-files"
+    "build": "rm -rf ./build/ && babel src --out-dir build/ --copy-files",
+    "empty": "node ./src/data/seedDatabase.js --delete",
+    "sample": "node ./src/data/seedDatabase.js"
   },
   "engines": {
     "node": "8.9.4"

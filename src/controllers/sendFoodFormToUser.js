@@ -1,19 +1,18 @@
 import winston from 'winston';
 import request from 'request';
-import inputForm from '../responses/inputOrderForm';
+import createFoodForm from '../responses/inputOrderForm';
 
-function placeOrder(req, res) {
+function sendFoodFormToUser(req, res) {
   try {
     winston.info('Slash command received from a slack user');
-    const response = inputForm(req.body);
-
     winston.info('Sending input form to user');
+
     request.post({
       url: process.env.DIALOG,
       headers: {
         Authorization: process.env.TOKEN,
       },
-      body: response,
+      body: createFoodForm(req.body),
       json: true,
     }, (err, resp, body) => {
       if (body.ok === true) {
@@ -27,4 +26,4 @@ function placeOrder(req, res) {
   }
 }
 
-export default placeOrder;
+export default sendFoodFormToUser;
