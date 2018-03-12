@@ -1,6 +1,6 @@
 import findTodaysDate from '../utilities/findTodaysDate';
 
-function formatInputOrder(userOrder, user, channelHook) {
+function formatInputOrder(userOrder, user) {
   let foodType = 'non-swallow';
   const swallowList = ['amala', 'poundedyam', 'iyan'];
 
@@ -31,7 +31,6 @@ function formatInputOrder(userOrder, user, channelHook) {
     priceOfOrder,
     user,
     created,
-    channelHook,
   };
 }
 

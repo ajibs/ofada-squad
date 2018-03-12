@@ -18,7 +18,6 @@ const foodSchema = new mongoose.Schema({
     required: true,
   },
   created: String,
-  channelHook: String,
 });
 
 module.exports = mongoose.model('Food', foodSchema);
