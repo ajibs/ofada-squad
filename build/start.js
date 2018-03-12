@@ -39,6 +39,8 @@ _mongoose2.default.connection.on('error', err => {
   _winston2.default.error(`Error!: ${err.message}`);
 });
 
+_winston2.default.info(`My database is ${process.env.DATABASE}`);
+
 app.start = async () => {
   _winston2.default.info('Starting Server...');
   const port = process.env.PORT;

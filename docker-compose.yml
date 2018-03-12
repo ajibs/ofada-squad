@@ -7,10 +7,14 @@ services:
     ports:
       - "4000:8000"
     links:
-      - mongo
+      - database
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - database
 
-  mongo:
-    container_name: mongo
+  database:
+    container_name: database
     image: mongo
     ports:
       - "27017:27017"
