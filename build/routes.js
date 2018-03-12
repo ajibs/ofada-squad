@@ -12,9 +12,9 @@ var _saveOrder = require('./controllers/saveOrder');
 
 var _saveOrder2 = _interopRequireDefault(_saveOrder);
 
-var _placeOrder = require('./controllers/placeOrder');
+var _sendFoodFormToUser = require('./controllers/sendFoodFormToUser');
 
-var _placeOrder2 = _interopRequireDefault(_placeOrder);
+var _sendFoodFormToUser2 = _interopRequireDefault(_sendFoodFormToUser);
 
 var _getOrders = require('./controllers/getOrders');
 
@@ -30,12 +30,16 @@ var _totalPrice2 = _interopRequireDefault(_totalPrice);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import testing from './controllers/testing';
+
 const router = new _express2.default.Router();
 
 router.get('/', _showHome2.default);
 
+// router.post('/test', testing);
+
 // food order dialog form
-router.post('/slack/command/food', _placeOrder2.default);
+router.post('/slack/command/food', _sendFoodFormToUser2.default);
 
 // save to database and respond to user
 router.post('/slack/actions', _saveOrder2.default);

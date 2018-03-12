@@ -18,18 +18,17 @@ var _inputOrderForm2 = _interopRequireDefault(_inputOrderForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function placeOrder(req, res) {
+function sendFoodFormToUser(req, res) {
   try {
     _winston2.default.info('Slash command received from a slack user');
-    const response = (0, _inputOrderForm2.default)(req.body);
-
     _winston2.default.info('Sending input form to user');
+
     _request2.default.post({
       url: process.env.DIALOG,
       headers: {
         Authorization: process.env.TOKEN
       },
-      body: response,
+      body: (0, _inputOrderForm2.default)(req.body),
       json: true
     }, (err, resp, body) => {
       if (body.ok === true) {
@@ -43,4 +42,4 @@ function placeOrder(req, res) {
   }
 }
 
-exports.default = placeOrder;
+exports.default = sendFoodFormToUser;
