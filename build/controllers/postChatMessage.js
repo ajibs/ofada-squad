@@ -26,8 +26,6 @@ const postChatMessage = message => new Promise((resolve, reject) => {
   if (text !== null) payload.text = text;
   if (replaceOriginal !== null) payload.replace_original = replaceOriginal;
 
-  // const responseUrl = '';
-
   _request2.default.post({
     url: responseUrl,
     body: payload,

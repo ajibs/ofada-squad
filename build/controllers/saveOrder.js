@@ -32,8 +32,7 @@ async function saveOrder(req, res) {
       const user = slackReqObj.user.name;
 
       _winston2.default.info('Formatting user order to proper input');
-      const channelHook = slackReqObj.response_url;
-      const formattedOrder = (0, _formatInputOrder2.default)(slackReqObj.submission.foodItems, user, channelHook);
+      const formattedOrder = (0, _formatInputOrder2.default)(slackReqObj.submission.foodItems, user);
 
       _winston2.default.info('Saving food order to database');
       await new Food(formattedOrder).save();

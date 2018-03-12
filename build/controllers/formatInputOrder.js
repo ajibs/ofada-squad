@@ -10,7 +10,7 @@ var _findTodaysDate2 = _interopRequireDefault(_findTodaysDate);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function formatInputOrder(userOrder, user, channelHook) {
+function formatInputOrder(userOrder, user) {
   let foodType = 'non-swallow';
   const swallowList = ['amala', 'poundedyam', 'iyan'];
 
@@ -38,8 +38,7 @@ function formatInputOrder(userOrder, user, channelHook) {
     foodType,
     priceOfOrder,
     user,
-    created,
-    channelHook
+    created
   };
 }
 
