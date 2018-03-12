@@ -7,7 +7,31 @@ Clone the repo, run the following in your app:
 git clone https://github.com/ajibs/ofada-squad.git
 ```
 
-### Requirements 
+Navigate to the root folder of the project, run the following command in your terminal:
+```
+cd ofada-squad
+```
+
+## With Docker
+To setup the app locally if you have the app running
+
+
+Create an app on [slack API](https://api.slack.com/apps) and change the `TOKEN` property in the  `.env.sample` file to the `OAuth Access token` issued to the new app on slack.
+
+Rebuild the project:
+```
+npm run build
+```
+
+Start the services:
+```
+docker-compose up
+```
+
+Visit `localhost:4000` in your browser, you should see: `Hello World`;
+
+
+## Without Docker 
 You will need [Node.js](https://nodejs.org) v8.9.4 installed.
 
 ### Setup Config and Database
@@ -22,6 +46,15 @@ Create a database on [mlab](https://mlab.com) and change the `DATABASE` property
 
 ### Install Dependencies and Run
 Run the following in your terminal
-```bash
-npm install && npm run dev
 ```
+npm install
+```
+
+Then:
+```
+npm run dev
+```
+
+Visit `localhost:8000` in your browser, you should see: `Hello World`;
+
+
