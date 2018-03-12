@@ -8,8 +8,12 @@ function formatInputOrder(userOrder, user) {
     .reduce((acc, currentValue) => acc + Number(currentValue), 0);
 
   const foodItems = userOrder
-    // .replace(/[*-]/g, '') // remove all * and - from string
-    .split('\n'); // split into array by /n  e.g. [" Rice  200  ", " Dodo  100  ", " Meat  100", " Egg  50"]
+    .split('\n') // split into array by /n  e.g. [" Rice  200  ", " Dodo  100  ", " Meat  100", " Egg  50"]
+    .map((item) => {
+      const foodName = item.replace(/[^a-z]/gi, ''); // filter out everything except alphabets
+      const amount = item.replace(/[^0-9]/g, ''); // filter out everything except numbers
+      return [foodName, amount];
+    });
 
   const created = findTodaysDate();
 
