@@ -13,8 +13,7 @@ cd ofada-squad
 ```
 
 ## With Docker
-To setup the app locally if you have the app running
-
+To setup the app locally if you have docker installed, do the following:
 
 Create an app on [slack API](https://api.slack.com/apps) and change the `TOKEN` property in the  `.env.sample` file to the `OAuth Access token` issued to the new app on slack.
 
