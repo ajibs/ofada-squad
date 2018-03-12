@@ -2,6 +2,7 @@ import findTodaysDate from '../utilities/findTodaysDate';
 
 function formatInputOrder(userOrder, user) {
   let foodType = 'non-swallow';
+  const swallowList = ['amala', 'poundedyam', 'iyan'];
 
   // extract the numbers out and sum
   const priceOfOrder = userOrder
@@ -12,10 +13,10 @@ function formatInputOrder(userOrder, user) {
   const foodItems = userOrder
     .split('\n') // split into array by /n  e.g. [" Rice  200  ", " Dodo  100  ", " Meat  100", " Egg  50"]
     .map((item) => {
-      const foodName = item.replace(/[^a-z]/gi, ''); // filter out everything except alphabets
+      const foodName = item.replace(/[^a-z]/gi, '').toLowerCase(); // filter out everything except alphabets
       const amount = item.replace(/[^0-9]/g, ''); // filter out everything except numbers
 
-      if (foodName === 'Amala' || foodName === 'amala') {
+      if (swallowList.includes(foodName)) {
         foodType = 'swallow';
       }
 

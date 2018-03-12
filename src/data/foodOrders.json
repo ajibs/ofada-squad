@@ -1,11 +1,11 @@
 [{
   "foodItems": [
     [
-      "Amala",
+      "amala",
       "200"
     ],
     [
-      "Meat",
+      "meat",
       "150"
     ]
   ],
@@ -18,15 +18,15 @@
 {
   "foodItems": [
     [
-      "Rice",
+      "rice",
       "200"
     ],
     [
-      "Chicken",
+      "chicken",
       "600"
     ],
     [
-      "Fish",
+      "fish",
       "400"
     ]
   ],
