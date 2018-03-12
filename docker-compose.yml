@@ -1,0 +1,16 @@
+version: "2"
+services:
+  ofada-app:
+    container_name: ofada-server
+    restart: always
+    build: .
+    ports:
+      - "4000:8000"
+    links:
+      - mongo
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
