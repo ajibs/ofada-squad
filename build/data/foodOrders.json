@@ -1,0 +1,37 @@
+[{
+  "foodItems": [
+    [
+      "amala",
+      "200"
+    ],
+    [
+      "meat",
+      "150"
+    ]
+  ],
+  "foodType": "swallow",
+  "_id": "5aa63eb1f3dced059b8ce1b8",
+  "priceOfOrder": 350,
+  "user": "ajibs",
+  "created": "2018-03-12"
+},
+{
+  "foodItems": [
+    [
+      "rice",
+      "200"
+    ],
+    [
+      "chicken",
+      "600"
+    ],
+    [
+      "fish",
+      "400"
+    ]
+  ],
+  "_id": "5aa640cbb2437805ce2a3d33",
+  "priceOfOrder": 1200,
+  "user": "toyosi",
+  "created": "2018-03-12"
+}]
