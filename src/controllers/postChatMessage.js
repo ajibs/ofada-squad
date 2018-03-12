@@ -5,7 +5,6 @@ const postChatMessage = message => new Promise((resolve, reject) => {
     responseUrl,
     channel = null,
     text = null,
-    attachments = null,
     replaceOriginal = null,
   } = message;
 
@@ -15,8 +14,10 @@ const postChatMessage = message => new Promise((resolve, reject) => {
 
   if (channel !== null) payload.channel = channel;
   if (text !== null) payload.text = text;
-  if (attachments !== null) payload.attachments = attachments;
   if (replaceOriginal !== null) payload.replace_original = replaceOriginal;
+
+  console.log(responseUrl);
+  // const responseUrl = '';
 
   request.post({
     url: responseUrl,
