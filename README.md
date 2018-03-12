@@ -27,11 +27,13 @@ Start the services:
 docker-compose up
 ```
 
-Visit `localhost:4000` in your browser, you should see: `Hello World`;
+Visit `localhost:4000` in your browser, you should see: `Hello World`
+
+
 
 
 ## Without Docker 
-You will need [Node.js](https://nodejs.org) v8.9.4 installed.
+You will need [Node.js](https://nodejs.org) `v8.9.4` installed.
 
 ### Setup Config and Database
 Create a `.env` file, run the following in your terminal: 
@@ -54,6 +56,6 @@ Then:
 npm run dev
 ```
 
-Visit `localhost:8000` in your browser, you should see: `Hello World`;
+Visit `localhost:8000` in your browser, you should see: `Hello World`
 
 
