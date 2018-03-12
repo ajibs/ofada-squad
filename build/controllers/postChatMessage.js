@@ -8,6 +8,10 @@ var _request = require('request');
 
 var _request2 = _interopRequireDefault(_request);
 
+var _winston = require('winston');
+
+var _winston2 = _interopRequireDefault(_winston);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const postChatMessage = message => new Promise((resolve, reject) => {
@@ -26,13 +30,14 @@ const postChatMessage = message => new Promise((resolve, reject) => {
   if (text !== null) payload.text = text;
   if (replaceOriginal !== null) payload.replace_original = replaceOriginal;
 
-  console.log(responseUrl);
+  _winston2.default.info('Hook for channel');
+  _winston2.default.info(responseUrl);
   // const responseUrl = '';
 
   _request2.default.post({
     url: responseUrl,
     body: payload,
-    json: true,
+    json: true
   }, (err, response, body) => {
     if (err) {
       reject(err);
