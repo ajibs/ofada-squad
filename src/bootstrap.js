@@ -1,10 +1,14 @@
 import winston from 'winston';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import router from './routes';
 
 export default function (app) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+
+  // enable cors
+  app.use(cors());
 
   // Routes
   app.use(router);
