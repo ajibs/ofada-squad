@@ -8,6 +8,9 @@ exports.default = function (app) {
   app.use(_bodyParser2.default.json());
   app.use(_bodyParser2.default.urlencoded({ extended: true }));
 
+  // enable cors
+  app.use((0, _cors2.default)());
+
   // Routes
   app.use(_routes2.default);
 
@@ -39,6 +42,10 @@ var _winston2 = _interopRequireDefault(_winston);
 var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _cors = require('cors');
+
+var _cors2 = _interopRequireDefault(_cors);
 
 var _routes = require('./routes');
 
