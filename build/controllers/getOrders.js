@@ -19,7 +19,8 @@ const Food = require('../models/Food');
 async function getOrders(req, res) {
   _winston2.default.info('Fetching food orders from DB');
   const orders = await Food.find({ created: (0, _findTodaysDate2.default)() });
-  return res.json(orders);
+  const count = orders.length;
+  return res.json({ orders, count });
 }
 
 exports.default = getOrders;
