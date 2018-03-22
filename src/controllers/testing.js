@@ -1,17 +1,32 @@
 function testing(req, res) {
   let foodType = 'non-swallow';
-  const foodItems = req.body.foodItems
-    .split('\n') // split into array by /n  e.g. [" Rice  200  ", " Dodo  100  ", " Meat  100", " Egg  50"]
-    .map((elem) => {
-      const item = elem.replace(/[^a-z]/gi, ''); // filter out everything except alphabets
-      if (item === 'Amala' || item === 'amala') {
-        foodType = 'swallow';
-      }
-      const amount = elem.replace(/[^0-9]/g, ''); // filter out everything except numbers
-      return [item, amount];
-    });
+  const swallowList = ['amala', 'poundedyam', 'iyan'];
 
-  res.json({ foodItems, foodType });
+  let foodItems;
+  try {
+    foodItems = req.body.foodItems
+      .split('\n') // split into array by /n  e.g. [" Rice  200  ", " Dodo  100  ", " Meat  100", " Egg  50"]
+      .map((item) => {
+        const foodName = item.replace(/[^a-z]/gi, '').toLowerCase(); // filter out everything except alphabets
+        const amount = item.replace(/[^0-9]/g, ''); // filter out everything except numbers
+
+        if (swallowList.includes(foodName)) {
+          foodType = 'swallow';
+        }
+
+        if (amount.length <= 1) {
+          console.log('invalid input');
+          throw 'error';
+        }
+
+        return [foodName, amount];
+      });
+
+    res.json({ foodItems, foodType });
+  } catch (e) {
+    console.log('got here');
+    res.json({ error: 'Invalid input' });
+  }
 }
 
 export default testing;

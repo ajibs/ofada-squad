@@ -4,13 +4,13 @@ import sendFoodFormToUser from './controllers/sendFoodFormToUser';
 import getFoodOrders from './controllers/getOrders';
 import showHomePage from './controllers/showHome';
 import totalPriceForToday from './controllers/totalPrice';
-// import testing from './controllers/testing';
+import testing from './controllers/testing';
 
 const router = new express.Router();
 
 router.get('/', showHomePage);
 
-// router.post('/test', testing);
+router.post('/test', testing);
 
 // food order dialog form
 router.post('/slack/command/food', sendFoodFormToUser);
