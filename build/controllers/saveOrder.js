@@ -20,19 +20,28 @@ var _formatInputOrder = require('./formatInputOrder');
 
 var _formatInputOrder2 = _interopRequireDefault(_formatInputOrder);
 
+var _invalidOrder = require('../responses/invalidOrder');
+
+var _invalidOrder2 = _interopRequireDefault(_invalidOrder);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const Food = require('../models/Food');
 
 async function saveOrder(req, res) {
-  try {
-    const slackReqObj = JSON.parse(req.body.payload);
+  const slackReqObj = JSON.parse(req.body.payload);
+  const user = slackReqObj.user.name;
 
+  try {
     if (slackReqObj.callback_id === 'user_order') {
-      const user = slackReqObj.user.name;
 
       _winston2.default.info('Formatting user order to proper input');
       const formattedOrder = (0, _formatInputOrder2.default)(slackReqObj.submission.foodItems, user);
+
+      if (formattedOrder.error) {
+        _winston2.default.info('caught error');
+        throw 'invalid order provided';
+      }
 
       _winston2.default.info('Saving food order to database');
       await new Food(formattedOrder).save();
@@ -43,7 +52,8 @@ async function saveOrder(req, res) {
     return res.status(200).send();
   } catch (err) {
     _winston2.default.error(err);
-    return res.status(500).send('Something blew up. We\'re looking into it.');
+    (0, _postChatMessage2.default)((0, _invalidOrder2.default)(slackReqObj, user));
+    return res.status(200).send();
   }
 }
 
