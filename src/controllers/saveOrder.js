@@ -2,18 +2,24 @@ import winston from 'winston';
 import postChatMessage from './postChatMessage';
 import orderReceivedMessage from '../responses/orderReceived';
 import formatFoodOrder from './formatInputOrder';
+import invalidOrder from '../responses/invalidOrder';
 
 const Food = require('../models/Food');
 
 async function saveOrder(req, res) {
-  try {
-    const slackReqObj = JSON.parse(req.body.payload);
+  const slackReqObj = JSON.parse(req.body.payload);
+  const user = slackReqObj.user.name;
 
+  try {
     if (slackReqObj.callback_id === 'user_order') {
-      const user = slackReqObj.user.name;
 
       winston.info('Formatting user order to proper input');
       const formattedOrder = formatFoodOrder(slackReqObj.submission.foodItems, user);
+
+      if (formattedOrder.error) {
+        winston.info('caught error');
+        throw 'invalid order provided';
+      }
 
       winston.info('Saving food order to database');
       await new Food(formattedOrder).save();
@@ -24,7 +30,8 @@ async function saveOrder(req, res) {
     return res.status(200).send();
   } catch (err) {
     winston.error(err);
-    return res.status(500).send('Something blew up. We\'re looking into it.');
+    postChatMessage(invalidOrder(slackReqObj, user));
+    return res.status(200).send();
   }
 }
 

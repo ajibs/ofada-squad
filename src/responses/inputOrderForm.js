@@ -9,7 +9,7 @@ function inputOrderForm(data) {
         type: 'textarea',
         label: 'Food Details',
         name: 'foodItems',
-        placeholder: 'Amala - 200\nBeef - 100\nPlantain - 100',
+        placeholder: 'Food - Price\nAmala - 200\nBeef - 100\nPlantain - 100',
       }],
     },
   };
